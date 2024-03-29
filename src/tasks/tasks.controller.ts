@@ -9,7 +9,9 @@ import {
   Patch,
   Post,
   Query,
+  UploadedFile,
   UseGuards,
+  UseInterceptors,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
@@ -22,6 +24,7 @@ import { TaskStatus } from './task-status.enum';
 import { AuthGuard } from '@nestjs/passport';
 import { User } from 'src/auth/user.entity';
 import { GetUser } from 'src/auth/get-user.decorator';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 @Controller('tasks')
 @UseGuards(AuthGuard())
