@@ -11,8 +11,8 @@ import { FilesModule } from './files/files.module';
     TypeOrmModule.forRoot(typeOrmConfig),
     TasksModule,
     AuthModule,
-    MulterModule.register({ dest: './uploads' }),
     FilesModule,
+    MulterModule.register({ dest: './uploads' }),
   ],
 })
 export class AppModule {}
