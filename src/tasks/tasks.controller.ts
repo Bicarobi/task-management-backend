@@ -79,4 +79,14 @@ export class TasksController {
   ): Promise<Task> {
     return this.tasksService.updateTaskStatus(id, status, user);
   }
+
+  @Patch('/:id')
+  updateTask(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() createTaskDto: CreateTaskDto,
+    @Body('status', TaskStatusValidationPipe) status: TaskStatus,
+    @GetUser() user: User,
+  ): Promise<Task> {
+    return this.tasksService.updateTask(id, createTaskDto, status, user);
+  }
 }

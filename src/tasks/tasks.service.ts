@@ -55,4 +55,20 @@ export class TasksService {
     await task.save();
     return task;
   }
+
+  async updateTask(
+    id: number,
+    createTaskDto: CreateTaskDto,
+    status: TaskStatus,
+    user: User,
+  ): Promise<Task> {
+    const task = await this.getTaskById(id, user);
+    const { title, description } = createTaskDto;
+
+    task.title = title;
+    task.description = description;
+    task.status = status;
+    await task.save();
+    return task;
+  }
 }
