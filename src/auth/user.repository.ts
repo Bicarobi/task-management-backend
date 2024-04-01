@@ -3,6 +3,8 @@ import { User } from './user.entity';
 import { AuthCredentialsDto } from './dto/auth-credentials.dto';
 import {
   ConflictException,
+  HttpException,
+  HttpStatus,
   InternalServerErrorException,
 } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
@@ -21,11 +23,12 @@ export class UserRepository extends Repository<User> {
       await user.save();
     } catch (error) {
       if (error.code === '23505') {
-        // duplicate username
-        throw new ConflictException('Username already exists');
+        throw new HttpException('username-exists', HttpStatus.CONFLICT);
       } else {
         throw new InternalServerErrorException();
       }
+    } finally {
+      throw new HttpException('account-created', HttpStatus.CREATED);
     }
   }
 
