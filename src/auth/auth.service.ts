@@ -1,4 +1,4 @@
-import { Injectable, Logger, UnauthorizedException } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable, Logger } from '@nestjs/common';
 import { UserRepository } from './user.repository';
 import { InjectRepository } from '@nestjs/typeorm';
 import { AuthCredentialsDto } from './dto/auth-credentials.dto';
@@ -25,7 +25,7 @@ export class AuthService {
       await this.userRepository.validateUserPassword(authCredentialsDto);
 
     if (!username) {
-      throw new UnauthorizedException('Invalid credentials');
+      throw new HttpException('invalid-credentials', HttpStatus.UNAUTHORIZED);
     }
 
     const payload: JwtPayload = { username };

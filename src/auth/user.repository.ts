@@ -27,9 +27,9 @@ export class UserRepository extends Repository<User> {
       } else {
         throw new InternalServerErrorException();
       }
-    } finally {
-      throw new HttpException('account-created', HttpStatus.CREATED);
     }
+
+    throw new HttpException('account-created', HttpStatus.CREATED);
   }
 
   async validateUserPassword(
