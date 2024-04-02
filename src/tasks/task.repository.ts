@@ -64,21 +64,3 @@ export class TaskRepository extends Repository<Task> {
     return task;
   }
 }
-
-/*
-@Injectable()
-export class TaskRepository extends Repository<Task> {
-  constructor(private repository: TaskRepository) {}
-} 
-
-@Injectable()
-export class TaskRepository extends Repository<Task> {
-  constructor(
-    @InjectRepository(Task)
-    repository: Repository<Task>,
-  ) {
-    
-    super(repository.target, repository.manager, repository.queryRunner);
-    
-  }
-}*/

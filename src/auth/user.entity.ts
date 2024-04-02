@@ -1,10 +1,13 @@
 import * as bcrypt from 'bcrypt';
 import { Task } from 'src/tasks/task.entity';
+import { File } from 'src/files/files.entity';
+
 import {
   BaseEntity,
   Column,
   Entity,
   OneToMany,
+  OneToOne,
   PrimaryGeneratedColumn,
   Unique,
 } from 'typeorm';
@@ -31,4 +34,7 @@ export class User extends BaseEntity {
     const hash = await bcrypt.hash(password, this.salt);
     return hash === this.password;
   }
+
+  @OneToOne(() => File, (file) => file.user, { eager: true })
+  file: File;
 }
