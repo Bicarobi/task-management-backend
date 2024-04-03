@@ -46,12 +46,12 @@ export class FilesRepository extends Repository<File> {
       file.user = user;
 
       const files = await this.getFile(user);
-      this.logger.debug(files);
-
       try {
         if (files) {
-          this.update(user.id, file);
+          this.logger.debug(`Updating "${user.username}" file url.`);
+          this.update({ user: user }, { url: file.url });
         } else {
+          this.logger.debug(`Saving "${user.username}" file url.`);
           await file.save();
         }
       } catch (error) {
